@@ -15,6 +15,17 @@ body{
     line-height: 1.4;
 }
 
+body.dark-mode {
+    background-color: #1f1e1d;
+    color: #f2efe4;
+}
+
+.dark-mode .social a,
+.dark-mode .email,
+.dark-mode a {
+    color: #f2efe4;
+}
+
 /* .content{
     margin-top: 15%;
    
@@ -24,9 +35,77 @@ body{
      margin-top: 155px;
 }
 
+.theme-toggle{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+}
+
+.toggle-switch{
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+}
+
+.toggle-checkbox{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label{
+    border: 1px solid currentColor;
+    background-color: #f2efe4;
+    cursor: pointer;
+    border-radius: 2rem;
+    width: 40px;
+    height: 20px;
+    margin-bottom: 0;
+    padding: 0;
+    position: absolute;
+    inset: 0%;
+}
+
+.toggle-label:before{
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: currentColor;
+    transition: 0s;
+    border-radius: 50%;
+}
+
+.toggle-label.has-transition:before{
+    transition: 0.2s;
+}
+
+.toggle-checkbox:checked + .toggle-label:before{
+    transform: translateX(20px);
+}
+
+.dark-mode .toggle-label{
+    background-color: #1f1e1d;
+}
+
 .content{
     font-size: 20px;
     /* background-color: green; */
+}
+
+.header-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-row h2{
+    margin: 0;
 }
 
 h2{
