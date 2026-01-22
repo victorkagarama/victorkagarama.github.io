@@ -58,9 +58,8 @@
     <script>
         const themeToggle = document.getElementById("theme-toggle");
         const storedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-        if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+        if (storedTheme === "dark") {
             document.body.classList.add("dark-mode");
             themeToggle.checked = true;
         }
