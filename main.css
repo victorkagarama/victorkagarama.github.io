@@ -10,7 +10,7 @@ body{
     padding: 0;
     /* height: 100vh; */
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Nunito, sans-serif;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     --bg-opacity: 1;
     background-color: #f2efe4;
     background-color: rgba(242,239,228,var(--bg-opacity));
