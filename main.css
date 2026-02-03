@@ -124,6 +124,11 @@ p {
 
 .astutebridge-link {
 text-decoration: underline;
+    color: inherit;
+}
+
+.astutebridge-link:visited {
+    color: inherit;
 }
 
 span {
@@ -151,9 +156,13 @@ i {
 
 .email{
     text-decoration:underline;
+    color: inherit;
 }
 .email:hover {
     text-decoration:none;
+}
+.email:visited {
+    color: inherit;
 }
 .footer-note {
     margin: 0 0 20px;
