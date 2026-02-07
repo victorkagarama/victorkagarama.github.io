@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Will You Be My Valentine?</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Dancing+Script:wght@500;700&family=Playfair+Display:wght@500;700;800&display=swap");
+      :root {
+        --bg1: #ffd6e7;
+        --bg2: #ffeef6;
+        --pink: #ff5fa2;
+        --red: #e6194b;
+        --deep: #b31237;
+        --white: #fff7fb;
+        --shadow: rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Playfair Display", "Times New Roman", serif;
+        color: #4a1b2a;
+        overflow: hidden;
+        background: radial-gradient(circle at 20% 10%, var(--bg2), var(--bg1));
+        display: grid;
+        place-items: center;
+      }
+
+      .glow {
+        position: absolute;
+        inset: -20%;
+        background: radial-gradient(circle at 70% 30%, #fff, transparent 55%),
+          radial-gradient(circle at 25% 70%, #fff, transparent 60%);
+        opacity: 0.35;
+        filter: blur(30px);
+        pointer-events: none;
+      }
+
+      .hearts {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .heart {
+        position: absolute;
+        width: var(--size, 22px);
+        height: var(--size, 22px);
+        background: var(--pink);
+        transform: rotate(45deg);
+        opacity: 0.8;
+        animation: floatUp 12s linear infinite;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: var(--size, 22px);
+        height: var(--size, 22px);
+        background: inherit;
+        border-radius: 50%;
+      }
+
+      .heart::before {
+        left: calc(var(--size, 22px) * -0.5);
+        top: 0;
+      }
+
+      .heart::after {
+        left: 0;
+        top: calc(var(--size, 22px) * -0.5);
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(120vh) rotate(45deg) scale(0.7);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateY(-20vh) rotate(45deg) scale(1.1);
+          opacity: 0;
+        }
+      }
+
+      .card {
+        position: relative;
+        z-index: 2;
+        width: min(92vw, 780px);
+        padding: 56px 36px 36px;
+        background: linear-gradient(180deg, #fff7fb 0%, #ffe8f1 100%);
+        border-radius: 22px;
+        box-shadow: 0 24px 60px var(--shadow);
+        border: 2px solid #f7b8cf;
+        text-align: center;
+      }
+
+      .card::before,
+      .card::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+      }
+
+      /* Top flap */
+      .card::before {
+        top: -58px;
+        border-bottom: 58px solid #ffd1e1;
+        filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.08));
+      }
+
+      /* Bottom fold */
+      .card::after {
+        bottom: -46px;
+        border-top: 46px solid #f7b8cf;
+        opacity: 0.9;
+      }
+
+      .envelope-edge {
+        position: absolute;
+        inset: 10px;
+        border-radius: 16px;
+        border: 2px dashed rgba(179, 18, 55, 0.18);
+        pointer-events: none;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: clamp(22px, 3.2vw, 30px);
+        line-height: 1.45;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        font-family: "Cormorant Garamond", "Playfair Display", "Times New Roman",
+          serif;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      button {
+        font-size: 18px;
+        font-weight: 700;
+        padding: 12px 26px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      #yesBtn {
+        background: linear-gradient(180deg, #ff6fb0, #ff3f8f);
+        color: white;
+        box-shadow: 0 10px 20px rgba(255, 63, 143, 0.35);
+      }
+
+      #yesBtn:active {
+        transform: scale(0.98);
+      }
+
+      #noBtn {
+        background: #ffe2ee;
+        color: #b31237;
+        box-shadow: 0 8px 16px rgba(179, 18, 55, 0.2);
+        position: relative;
+      }
+
+      #message {
+        margin-top: 18px;
+        font-size: clamp(20px, 3.5vw, 34px);
+        font-weight: 800;
+        color: var(--deep);
+        min-height: 44px;
+        font-family: "Cormorant Garamond", "Playfair Display", "Times New Roman",
+          serif;
+      }
+
+      #confetti {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      #ytPlayer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        height: 1px;
+        border: none;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .footer {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #8c3c54;
+        font-family: "Cormorant Garamond", "Playfair Display", "Times New Roman",
+          serif;
+      }
+
+      @media (max-width: 520px) {
+        .card {
+          padding: 34px 22px 28px;
+        }
+        .card::before,
+        .card::after {
+          border-left-width: 110px;
+          border-right-width: 110px;
+        }
+        .card::before {
+          top: -44px;
+          border-bottom-width: 44px;
+        }
+        .card::after {
+          bottom: -36px;
+          border-top-width: 36px;
+        }
+        button {
+          width: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="confetti"></canvas>
+    <audio
+      id="loveSong"
+      src="Andy BUMUNTU - VALENTINE Official Lyrics (translation )Video - ANDY BUMUNTU.mp3"
+      preload="auto"
+    ></audio>
+    <div class="glow"></div>
+    <div class="hearts" aria-hidden="true"></div>
+
+    <main class="card">
+      <div class="envelope-edge" aria-hidden="true"></div>
+      <h1>
+        I know I have you, and I have nothing else in the world to ask for
+        but... Will you be my Valentine, babe?🌹
+      </h1>
+      <div class="footer">
+        From: Your man, Victor.<br />
+        To: the most beautiful princess, Shania.
+      </div>
+      <div class="buttons">
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
+      </div>
+      <div id="message"></div>
+      <div class="footer">P.S. The NO button is super shy.</div>
+    </main>
+
+    <script>
+      const heartsWrap = document.querySelector(".hearts");
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const message = document.getElementById("message");
+
+      // Create floating hearts
+      const heartColors = ["#ff5fa2", "#e6194b", "#ff7fbf", "#d4143a"];
+      for (let i = 0; i < 42; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        const size = 14 + Math.random() * 22;
+        heart.style.setProperty("--size", `${size}px`);
+        heart.style.background =
+          heartColors[Math.floor(Math.random() * heartColors.length)];
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDelay = `${Math.random() * 8}s`;
+        heart.style.animationDuration = `${10 + Math.random() * 10}s`;
+        heart.style.opacity = `${0.5 + Math.random() * 0.5}`;
+        heartsWrap.appendChild(heart);
+      }
+
+      // Make NO button run away
+      const moveNoButton = () => {
+        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+        const x = Math.max(20, Math.random() * maxX);
+        const y = Math.max(20, Math.random() * maxY);
+        noBtn.style.position = "fixed";
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+      };
+
+      noBtn.addEventListener("mouseenter", moveNoButton);
+      noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        moveNoButton();
+      });
+
+      // Confetti burst
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      let confettiPieces = [];
+
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      const colors = ["#ff3f8f", "#ff6fb0", "#e6194b", "#ffd1e8"];
+
+      const makeConfetti = (count = 180) => {
+        confettiPieces = Array.from({ length: count }, () => ({
+          x: canvas.width / 2,
+          y: canvas.height / 3,
+          r: 4 + Math.random() * 6,
+          c: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 8,
+          vy: Math.random() * -8 - 2,
+          g: 0.15 + Math.random() * 0.2,
+          life: 120 + Math.random() * 80,
+        }));
+      };
+
+      const drawConfetti = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiPieces.forEach((p) => {
+          ctx.beginPath();
+          ctx.fillStyle = p.c;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      };
+
+      const updateConfetti = () => {
+        confettiPieces.forEach((p) => {
+          p.vy += p.g;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= 1;
+        });
+        confettiPieces = confettiPieces.filter((p) => p.life > 0);
+      };
+
+      const animate = () => {
+        updateConfetti();
+        drawConfetti();
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+
+      yesBtn.addEventListener("click", () => {
+        message.textContent = "I LOVE YOU SOOO MUCH MY FOREVER VALENTINE!❤️🌹";
+        makeConfetti();
+        const audio = document.getElementById("loveSong");
+        if (audio) {
+          audio.currentTime = 38;
+          const playPromise = audio.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {
+              // If the browser blocks playback, user can tap YES again.
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
