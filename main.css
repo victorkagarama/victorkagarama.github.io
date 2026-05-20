@@ -35,7 +35,9 @@ body.dark-mode {
 } */
 .container{
      height: 100%;
-     margin-top: 155px;
+     margin: 155px auto 0;
+     max-width: 720px;
+     padding: 0 24px;
      flex: 1;
 }
 
